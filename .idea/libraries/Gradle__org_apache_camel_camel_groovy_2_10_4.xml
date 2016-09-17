@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.camel:camel-groovy:2.10.4">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.camel/camel-groovy/2.10.4/680d5417743356c84f0ad4ba695aba7101d455c8/camel-groovy-2.10.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.camel/camel-groovy/2.10.4/b6d62c81ca4a636a004733711e4f0cca6c6129a8/camel-groovy-2.10.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,70 @@
+
+
+apply plugin: 'groovy'
+buildDir = '../target/'
+sourceCompatibility = 1.7
+
+repositories {
+    mavenLocal()
+  
+    maven { url "http://maven.springframework.org/release" }
+    mavenCentral()
+    
+    maven { url "https://repository.apache.org/content/repositories/snapshots/" }
+
+    // for MQ jars
+    flatDir {
+        dirs 'lib'
+    }
+}
+
+
+dependencies {
+    final SPRING_VERSION = '3.2.2.RELEASE'
+    final CAMEL_VERSION = '2.10.4'
+    final SPOCK_VERSION = '0.7-groovy-2.0'
+    final SLF4J_VERSION = '1.7.5'
+    final LOGBACK_VERSION = '1.0.11'
+    final XMLUNIT_VERSION = '2.2.1'
+
+    // logging spring cleaning - use slf4j instead of commons-logging
+    runtime "org.slf4j:jcl-over-slf4j:$SLF4J_VERSION"
+    runtime "ch.qos.logback:logback-classic:$LOGBACK_VERSION"
+    compile "org.slf4j:slf4j-api:$SLF4J_VERSION"
+
+    testCompile "org.springframework:spring-context:$SPRING_VERSION"
+    testCompile "org.springframework:spring-test:$SPRING_VERSION"
+    testCompile "org.springframework:spring-tx:$SPRING_VERSION"
+    testCompile "org.springframework:spring-jms:$SPRING_VERSION"
+    testCompile "org.apache.camel:camel-core:$CAMEL_VERSION"
+    testCompile "org.apache.camel:camel-groovy:$CAMEL_VERSION"
+    testCompile "org.apache.camel:camel-spring-javaconfig:$CAMEL_VERSION"
+    testCompile "org.apache.camel:camel-jms:$CAMEL_VERSION"
+    testCompile "org.apache.camel:camel-test-spring:$CAMEL_VERSION"
+
+
+    testCompile ("org.apache.geronimo.specs:geronimo-j2ee-management_1.1_spec:1.0.1")
+    testCompile ("org.apache.geronimo.specs:geronimo-jms_1.1_spec:1.1.1")
+
+  
+    testCompile "org.spockframework:spock-core:$SPOCK_VERSION"
+    testCompile "org.spockframework:spock-spring:$SPOCK_VERSION"
+    testCompile "org.xmlunit:xmlunit-core:$XMLUNIT_VERSION"
+
+    
+    // needed for MQ/JMS
+    /*testCompile (group: 'com.ibm.mqclient', name: 'com.ibm.mqjms', version: '7.5.0.3')
+    testCompile (group: 'com.ibm.mqclient', name: 'com.ibm.mq', version: '7.5.0.3')
+    testCompile (group: 'com.ibm.mqclient', name: 'com.ibm.mq.commonservices', version: '7.5.0.3')
+    testCompile (group: 'com.ibm.mqclient', name: 'com.ibm.mq.jmqi', version: '7.5.0.3')
+    testCompile (group: 'com.ibm.mqclient', name: 'com.ibm.mq.headers', version: '7.5.0.3')
+    testCompile (group: 'com.ibm.mqclient', name: 'dhbcore', version: '7.5.0.3')
+    testCompile (group: 'com.ibm.mqclient', name: 'fscontext', version: '7.5.0.3')*/
+
+    compile name: 'com.ibm.mqjms7'
+
+}
+
+configurations {
+    all*.exclude module: 'commons-logging' // we use slf4j instead
+}
