@@ -1,0 +1,15 @@
+BROKER SCHEMA testing
+
+
+CREATE FILTER MODULE Testing_Filter
+	
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- check if there is a TestingHeader set in the JMS header - if so redirect the output back to the temporary reply queue the test is waiting for a response on
+		IF (CONTAINS(Root.MQRFH2.usr.TestingHeader,'True')) THEN
+            	RETURN TRUE;
+        END IF;
+			RETURN FALSE;
+	END;
+
+END MODULE;
